@@ -22,23 +22,6 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.outputEncoding = THREE,THREE.sRGBEncoding;
 camera.position.setZ(30);
 
-//Multiple rings objects object
-const internal_ring = new THREE.Mesh(
-  new THREE.TorusGeometry(.5,.25,25,100),
-  new THREE.MeshStandardMaterial( {color: 0xcc6347} )
-);
-
-const middle_ring = new THREE.Mesh(
-  new THREE.TorusGeometry(1,.25,25,100),
-  new THREE.MeshStandardMaterial( {color: 0xcc6347} )
-);
-
-const external_ring = new THREE.Mesh(
-  new THREE.TorusGeometry(1.5,.25,25,100),
-  new THREE.MeshStandardMaterial( {color: 0xcc6347} )
-);
-
-scene.add(internal_ring, middle_ring, external_ring)
 
 //Earth Object and the textures
 const earth_texture = new THREE.TextureLoader().load('earth_texture.jpg');
@@ -90,14 +73,6 @@ function moveCamera() {
   earth.position.y = -10 + 0.02 * t
 
   moon.position.y = -10 + 0.02 * t
-
-  figureEight(internal_ring,t)
-  figureEight(middle_ring, t)
-  figureEight(external_ring, t)
-
-  spinMove(internal_ring, -3)
-  spinMove(middle_ring, 2)
-  spinMove(external_ring, 1)
 
   //Change camera position on scroll, +15 added to be further from origin of coordinates
   camera.position.y = t * 0.02 + 1;
