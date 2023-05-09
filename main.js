@@ -40,6 +40,37 @@ const external_ring = new THREE.Mesh(
 
 scene.add(internal_ring, middle_ring, external_ring)
 
+//Earth Object and the textures
+const earth_texture = new THREE.TextureLoader().load('earth_texture.jpg');
+
+const earth = new THREE.Mesh(
+  new THREE.SphereGeometry(18,24,24),
+  new THREE.MeshStandardMaterial({
+    map: earth_texture,
+  } )
+);
+
+let earthCenter = new THREE.Vector3(20, 0, -30)
+earth.position.set(earthCenter.x, earthCenter.y, earthCenter.z)
+
+scene.add(earth);
+
+
+//Moon object for the giggles
+const moon_texture = new THREE.TextureLoader().load('moon_texture.jpg');
+
+const moon = new THREE.Mesh(
+  new THREE.SphereGeometry(4.5,24,24),
+  new THREE.MeshStandardMaterial({
+    map: moon_texture,
+  } )
+);
+
+let radius = 38;
+let angle = 0;
+let orbitSpeed = .01;
+
+scene.add(moon)
 
 //Lighting objects
 const ambientLight = new THREE.AmbientLight(0xcccccc);
@@ -56,7 +87,10 @@ scene.background = spaceTexture
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
 
-  
+  earth.position.y = -10 + 0.02 * t
+
+  moon.position.y = -10 + 0.02 * t
+
   figureEight(internal_ring,t)
   figureEight(middle_ring, t)
   figureEight(external_ring, t)
@@ -77,10 +111,15 @@ document.body.onscroll = moveCamera
 function animate() {
   requestAnimationFrame( animate );
 
+  earth.rotation.y += 0.01;
+  moon.rotation.y += 0.01;
+  angle += orbitSpeed
+
+  moon.position.x = earthCenter.x - radius * Math.cos(angle)
+  moon.position.z = earthCenter.z - radius * Math.sin(angle)
+
   renderer.render( scene, camera );
 }
-
-
 
 function figureEight( object, t ){
 
