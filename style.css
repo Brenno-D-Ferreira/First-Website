@@ -3,7 +3,7 @@
 :root {
   --dark-bg: rgba(15, 15, 15, 0.95);
   --bg-secondary: black;
-  --spacing: 350px;
+  --spacing: 150px;
   --text-primary: #b6b6b6;
   --text-secondary: #ececec;
   --transition-speed: 600ms;
@@ -177,12 +177,11 @@ body::-webkit-scrollbar-thumb {
 }
 
 main {
-  width: 100vw;
+  width: calc(100vw - 10rem);
   color: white;
   z-index: 99;
   position: absolute;
-  width: 100%;
-  margin: 5rem; /*Added to give space for navigation bar*/
+  margin-left: 7rem; /*Added to give space for navigation bar*/
   padding: 120px 0px;
   
   display: grid;
@@ -231,6 +230,7 @@ canvas {
     margin: 0;
     padding: 0;
     grid-column: 2 / span 9;
+    line-height: 2.8;
     margin-bottom: var(--spacing);
   }
 
